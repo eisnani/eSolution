@@ -1,0 +1,60 @@
+.approval-cycle {
+  display: flex;
+  justify-content: start;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+
+  @media only screen and (max-width: 33.5em) {
+    flex-direction: column;
+  }
+
+
+  li {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+
+    text-transform: capitalize;
+    list-style: none;
+
+    
+    span {
+      border-bottom: 2px solid transparent;
+      text-align: center;
+
+      &.current {
+        border-bottom: 2px solid var(--color-blue);
+      }
+
+      &.approved {
+        background-color: var(--color-green);
+        padding: .3rem 1rem;
+        border-radius: .3rem;
+        color: #fff;
+      }
+
+      &.declined {
+        background-color: var(--color-red);
+        padding: .3rem 1rem;
+        border-radius: .3rem;
+        color: #fff;
+      }
+    }
+    
+    &:not(:last-child)::after {
+      content: url(../assets/arrow-right.svg);
+      width: 2.5rem;
+      display: block;
+      filter: invert(30%);
+
+      @media only screen and (max-width: 33.5em) {
+        rotate: 90deg;
+      }
+    } 
+
+    &.current {
+      background-color: var(--color-blue-light-2);
+      color: #fff;
+    }
+  }
+}

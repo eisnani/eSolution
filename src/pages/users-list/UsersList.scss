@@ -1,0 +1,34 @@
+.users-list {
+  padding: 1rem 5rem 5rem 5rem;
+  min-height: calc(100vh - 13.1rem);
+  width: 100%;
+
+  @media only screen and (max-width: 33.5em) {
+    padding: 1rem;
+  }
+
+  //cont-keyword styling is at WorkForApproval.scss
+
+  .table-container {
+    border-radius: 1rem;
+    padding: 3rem;
+    box-shadow: 0 .5rem .8rem rgba(0,0,0,.3);
+    background-color: white;
+
+    .ul-heading {
+      font-size: 2rem;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .user-list {
+      text-align: left;
+    }
+  }
+
+  .err-del-doc {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--color-red);
+  }
+}

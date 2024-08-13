@@ -1,0 +1,33 @@
+.approval {
+
+  .list {
+    padding: 0 1rem 0;
+    border: 1px solid var(--color-gray-light);
+    border-radius: 1rem;
+
+    li {
+      list-style: none;
+      padding: 1.2rem;
+  
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--color-gray-light);
+      }
+
+      span {
+        &.from, &.to {
+          text-transform: capitalize;
+          font-weight: 600;
+        }
+
+        &.user-email {
+          text-transform: none;
+          font-weight: 400;
+        }
+      }
+
+      em {
+        white-space: pre-wrap;
+      }
+    }
+  }
+}

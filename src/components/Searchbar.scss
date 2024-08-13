@@ -1,0 +1,47 @@
+.searchbar {
+
+  @media only screen and (max-width: 33.5em) {
+    display: none;
+  }
+
+  .search-form {
+    display: flex;
+    margin-left: 1rem;
+
+    img {
+      width: 2.5rem;
+      filter: invert(30%);
+      position: static;
+      z-index: 10;
+    }
+    
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+    input {
+      outline: none;
+      border: 1px solid var(--color-gray-light);
+      padding: .8rem 1.4rem .8rem 4rem;
+      border-radius: 1rem;
+      width: 35rem;
+      margin-left: -3.5rem;
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      position: static;
+      z-index: 0;
+      transition: width .4s;
+
+      &[type="search"]::-webkit-search-decoration,
+      &[type="search"]::-webkit-search-cancel-button,
+      &[type="search"]::-webkit-search-results-button,
+      &[type="search"]::-webkit-search-results-decoration { display: none; }
+
+      &:focus {
+        width: 40rem;
+      }
+    }
+  }
+}

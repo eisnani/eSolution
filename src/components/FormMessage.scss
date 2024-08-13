@@ -1,0 +1,82 @@
+.form-message {
+  position: relative;
+  background-color: var(--color-bg-gray);
+  padding: 2rem;
+  box-shadow: 0 .5rem .8rem rgba(0,0,0,.5);
+  text-align: start;
+  font-size: 1.6rem;
+  min-width: 60rem;
+  border-radius: 1rem;
+
+  @media only screen and (max-width: 33.5em) {
+    min-width: fit-content;
+    margin-left: -3rem;
+    margin-right: -3rem;
+  }
+
+  p.to-rquester {
+    font-size: 1.6rem;
+    text-transform: none;
+    
+    span {
+      text-transform: lowercase;
+    }
+  }
+
+  label {
+    display: block;
+    margin-bottom: 2rem;
+
+    span {
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    span.span-to {
+      display: inline-block;
+      margin-right: 1rem;
+    }
+
+    select {
+      padding: 1rem 1.5rem;
+      outline: none;
+      border: none;
+      font-size: inherit;
+      font-family: inherit;
+      color: inherit;
+      border-radius: 1rem;
+      text-transform: capitalize;
+
+      @media only screen and (max-width: 33.5em) {
+        padding: 1rem .1rem;
+      }
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 30vh;
+      resize: none;
+      padding: 1rem;
+      font-size: inherit;
+      font-family: inherit;
+      outline: none;
+      border: none;
+      border-radius: 1rem;
+      resize: vertical;
+
+      &:focus {
+        border-bottom: 1px solid var(--color-blue);
+
+        &:invalid {
+          border-bottom: 1px solid var(--color-red);
+        }
+      }
+    }
+  }
+
+  .wrapper-btn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+  }
+}
