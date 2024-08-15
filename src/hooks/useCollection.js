@@ -1,19 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
-import { onSnapshot, query, where, orderBy, collection } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../firebase/config';
 
-export const useCollection = (ref, _query) => {
+export const useCollection = (ref) => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
   const [documents, setDocuments] = useState([]);
 
-  const q = useRef(_query).current;
-
   useEffect(() => {
     setIsPending(true);
 
-    let colRef = collection(db, ref);
-    if (q) colRef = query(colRef, where(...q));
+    const colRef = collection(db, ref);
 
     const unsub = onSnapshot(colRef, (snapshot) => {
       if (snapshot.empty) {
@@ -35,7 +32,7 @@ export const useCollection = (ref, _query) => {
       }
     );
     return () => unsub();
-  }, [ref, q])
+  }, [ref])
 
   // console.log(documents)
   
