@@ -15,7 +15,7 @@ import { useThemeContext } from '../hooks/useThemeContext';
 export default function Sidebar() {
   const divRef = useRef(null);
   const { isAdmin } = useAuthContext();
-  const { sidebarMode, hideSidebar } = useThemeContext();
+  const { sidebarMode, hideSidebar, themeMode } = useThemeContext();
   const navigate = useNavigate();
 
   const handleClickBranding = (e) => {
@@ -34,44 +34,44 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className={`sidebar ${sidebarMode}`}>
+      <div className={`sidebar ${sidebarMode} ${themeMode}`}>
         <div onClick={handleClickBranding} className='logo-placeholder' ref={divRef}>
           <h1 className='branding'>
-            <img src={barnding} alt='icon' />
+            <img src={barnding} alt='icon'/>
             eSolution
           </h1>
         </div>
 
         <img onClick={handleClose} className='iconClose' src={closeIcon} alt="icon" />
 
-        <nav onClick={window.innerWidth > 974 ? null : handleClose} >
-          <NavLink to='/approvals'>
+        <nav onClick={window.innerWidth > 974 ? null : handleClose}>
+          <NavLink to='/approvals' >
             <img src={approvalIcon} alt='icon' />
             For Approvals
           </NavLink>
 
-          <NavLink to='/inquiries'>
+          <NavLink to='/inquiries' >
             <img src={queryIcon} alt='icon' />
             Inquiries
           </NavLink>
 
-          <NavLink to='/requests'>
+          <NavLink to='/requests' >
             <img src={listIcon} alt='icon' />
             My Requests
           </NavLink>
 
-          <NavLink to='/create-request'>
+          <NavLink to='/create-request' >
             <img src={addWork} alt='icon' />
             Create a Request
           </NavLink>
 
-          <NavLink to='/users'>
+          <NavLink to='/users' >
             <img src={personGroup} alt='icon' />
             Users
           </NavLink>
 
           {isAdmin && (
-            <NavLink to='/create-user'>
+            <NavLink to='/create-user' >
               <img src={addPerson} alt='icon' />
               Create User
             </NavLink>

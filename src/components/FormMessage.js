@@ -5,6 +5,7 @@ import { useFirestore } from '../hooks/useFirestore';
 import { timestamp } from '../firebase/config';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useThemeContext } from '../hooks/useThemeContext';
 
 export default function FormMessage({ doc, setShowForm, replyTo, navToInquiries }) {
   const [queryTo, setQueryTo] = useState(replyTo ? doc.approval.queryFrom : doc.requestedBy.email);
@@ -12,6 +13,7 @@ export default function FormMessage({ doc, setShowForm, replyTo, navToInquiries 
   const { documents: users } = useCollection('users');
   const { updateDocument } = useFirestore('works');
   const { user } = useAuthContext();
+  const { themeMode } = useThemeContext();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -44,7 +46,7 @@ export default function FormMessage({ doc, setShowForm, replyTo, navToInquiries 
 
   return (
     <>
-      <form className='form-message' onSubmit={handleSubmit}>
+      <form className={`form-message ${themeMode}`} onSubmit={handleSubmit}>
         <label>
           <span className='span-to'>To</span>
         

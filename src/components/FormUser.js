@@ -5,6 +5,7 @@ import { designations, departments } from './SelectOptions';
 import { useFirestore } from '../hooks/useFirestore';
 import { useCreateUser } from '../hooks/useCreateUser';
 import Alert from './Alert';
+import { useThemeContext } from '../hooks/useThemeContext';
 
 export default function FormUser({ id, user }) {
   const [firstName, setFirstName] = useState('');
@@ -16,6 +17,7 @@ export default function FormUser({ id, user }) {
   const [showAlert, setShowAlert] = useState(false);
   const { updateDocument, response } = useFirestore('users');
   const { createUser, isPending, error, res } = useCreateUser();
+  const { themeMode } = useThemeContext();
 
   const inputRef = useRef('');
   const formRef = useRef(null);
@@ -68,7 +70,7 @@ export default function FormUser({ id, user }) {
   }, [res])
 
   return (
-    <div className="container-user-form">
+    <div className={`container-user-form ${themeMode}`}>
 
       <h3 className="form-heading">Form</h3>
 

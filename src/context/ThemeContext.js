@@ -10,6 +10,8 @@ const themeReducer = (state, action) => {
       return { ...state, sidebarMode: 'shown', modalMode: null, chevronMode: null, brandingMode: null }
     case 'MAX_MODAL':
       return { ...state, modalMode: action.payload }
+    case 'CHANGE_THEME':
+      return { ...state, themeMode: action.payload }
     default:
       return state;
   }
@@ -21,15 +23,22 @@ export const ThemeContextProvider = ({ children }) => {
     chevronMode: null,
     brandingMode: null,
     modalMode: null,
+    themeMode: 'light'
   });
 
   const hideSidebar = () => dispatch({ type: 'HIDE_SIDEBAR' });
   const showSidebar = () => dispatch({ type: 'SHOW_SIDEBAR' });
+  const changeMode = (themeMode) => dispatch({ type: 'CHANGE_THEME', payload: themeMode });
 
   useEffect(() => {
     let sidebarMode = localStorage.getItem('sidebarMode');
     if (sidebarMode === 'hidden') hideSidebar();
     else if (sidebarMode === 'shown') showSidebar();
+  }, []);
+
+  useEffect(() => {
+    let themeMode = localStorage.getItem('themeMode');
+    if (themeMode) changeMode(themeMode)
   }, []);
 
   useEffect(() => {
@@ -55,7 +64,7 @@ export const ThemeContextProvider = ({ children }) => {
   }, [])
   
   return (
-    <ThemeContext.Provider value={{ ...state, hideSidebar, showSidebar }}>
+    <ThemeContext.Provider value={{ ...state, hideSidebar, showSidebar, changeMode }}>
       { children }
     </ThemeContext.Provider>
   )

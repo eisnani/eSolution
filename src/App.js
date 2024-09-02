@@ -16,10 +16,10 @@ import WorkWithQuery from './pages/work-with-query/WorkWithQuery';
 
 function App() {
   const { user, authIsReady, isAdmin } = useAuthContext();
-  const { sidebarMode } = useThemeContext();
+  const { sidebarMode, themeMode } = useThemeContext();
 
   return (
-    <div className="App">
+    <div className={`App ${themeMode}`}>
       { authIsReady && 
         <BrowserRouter>
           { user && <Sidebar /> }        

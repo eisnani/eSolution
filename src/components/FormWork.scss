@@ -12,12 +12,49 @@
     border-radius: 1rem;
     position: relative;
 
+    //DARK MODE//
+    &.dark {
+      background: var(--color-dm-bg-2);
+      color: var(--color-dm-font);
+
+      .request-form {
+
+        .wrapper-requester,
+        .wrapper-department {
+          p {          
+            background: var(--color-dm-bg-3);
+            color: var(--color-dm-font);
+          }
+        }
+     
+        label input, 
+        label textarea, 
+        label select {
+          background: var(--color-dm-bg-3);
+          color: var(--color-dm-font);
+        }
+
+        button, a {
+          color: var(--color-dm-font);
+        }
+
+        .due-date {
+          ::-webkit-calendar-picker-indicator {
+            filter: invert(60%);
+          }
+          .date-picker {
+            color-scheme: dark;
+          }
+        }
+      }
+    }  
+
     @media only screen and (max-width: 33.5em) {
       min-width: 60rem;
     }
 
     @media only screen and (max-width: 29.5em) {
-      min-width: 45rem
+      min-width: 45rem;
     }
 
     .form-heading {
@@ -146,6 +183,7 @@
           }
         }
       }
+
       .specify-type { 
         grid-column: 2 / -1; 
         @media only screen and (max-width: 33.5em) {
@@ -160,6 +198,7 @@
           grid-column: 1 / -1;
         }
       }
+
       .amount { 
         grid-column: 2 / -1; 
         @media only screen and (max-width: 33.5em) {

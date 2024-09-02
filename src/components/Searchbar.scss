@@ -4,6 +4,17 @@
     display: none;
   }
 
+  //DARK MODE//
+  &.dark {
+    input {
+      background: var(--color-dm-bg-3);
+    }
+
+    .search-form img {
+      filter: invert(60%);
+    }
+  }
+
   .search-form {
     display: flex;
     margin-left: 1rem;

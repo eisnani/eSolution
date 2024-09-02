@@ -14,7 +14,7 @@ export default function WorkDetails() {
   const [showForm, setShowForm] = useState(false);
   const { id } = useParams();
   const { document } = useDocument('works', id);
-  const { modalMode } = useThemeContext();
+  const { modalMode, themeMode } = useThemeContext();
 
   const { user } = useAuthContext();
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function WorkDetails() {
 
         ( document.approval.approver === user.email && 
 
-          <div className={`work-details ${modalMode}`}>
+          <div className={`work-details ${modalMode} ${themeMode}`}>
             <div className='wrapper-img'>
               <img 
                 src={closeIcon} alt="icon" 
@@ -41,7 +41,7 @@ export default function WorkDetails() {
               />
             </div>
 
-            <div className="work-container">
+            <div className='work-container'>
               <Work document={document} />
 
               <div className="container-btn">

@@ -1,18 +1,21 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import './UsersList.scss';
-import { useCollection } from '../../hooks/useCollection';
-import Loader from '../../components/Loader';
 import { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+import { useCollection } from '../../hooks/useCollection';
+import { useAuthContext } from '../../hooks/useAuthContext'; 
+import { useThemeContext } from '../../hooks/useThemeContext';
+import Loader from '../../components/Loader';
 import Backdrop from '../../components/Backdrop';
 import Modal from '../../components/Modal';
-import { useAuthContext } from '../../hooks/useAuthContext'; 
 import closeIcon from '../../assets/close_small.svg';
+import './UsersList.scss';
 
 export default function UsersList() {
   const [showModal, setShowModal] = useState(false);
   const { documents, isPending, error } = useCollection('users');
   const [userId, setUserId] = useState('');
   const { isAdmin } = useAuthContext();
+  const { themeMode } = useThemeContext();
   const navigate = useNavigate();
 
   const queryString = useLocation().search;
@@ -40,7 +43,7 @@ export default function UsersList() {
   }
 
   return (
-    <div className='users-list'>
+    <div className={`users-list ${themeMode}`}>
       { isPending && <Loader /> }
       <div className='cont-keyword'>
         { query && 
@@ -51,9 +54,9 @@ export default function UsersList() {
         }
       </div> 
       { !error && !isPending && users.length > 0 && 
-        <div className="table-container">
+        <div className={`table-container ${themeMode}`}>
           <h3 className='ul-heading'>Users</h3>
-            <table>
+            <table className={themeMode}>
               <thead>
                 <tr>
                   <th>SN</th>

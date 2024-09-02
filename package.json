@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-private-property-in-object": "^7.24.7",
     "eslint-plugin-react-hooks": "^4.6.2",
     "sass": "^1.77.6",
     "sass-loader": "^14.2.1",

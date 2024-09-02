@@ -2,4 +2,8 @@
   min-height: calc(100vh - 13.1rem);
   width: 100%;
   padding: 2rem;
+
+  &.dark {
+    background: var(--color-dm-bg-1);
+  }
 }

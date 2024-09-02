@@ -14,6 +14,11 @@
   --color-white: #FFFFFF;
   --color-gray-text: #F6F9FC;
   --color-bg-gray: #F8F9FA;
+  --color-dm-bg-1: #18191A;
+  --color-dm-bg-2: #242526;
+  --color-dm-bg-3: #3A3B3C;
+  --color-dm-bg-4: #E4E6EB;
+  --color-dm-font: #B0B3B8;
 
   --font-family: "Open Sans", sans-serif;
   --font-size: 1.6rem;
@@ -100,10 +105,23 @@ table {
   width: 100%;
   color: var(--color-gray-dark);
 
+  &.dark {
+    border: 1px solid var(--color-dm-font);
+    color: var(--color-dm-font);
+
+    thead th {
+      background-color: var(--color-dm-bg-1);
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--color-dm-bg-3);
+    }
+  }
+
   tr:nth-child(even) {
     background-color: #f2f2f2;
   }
-
+  
   th {
     padding-top: 1.2rem;
     padding-bottom: 1.2rem;
@@ -122,6 +140,8 @@ table {
       }
     }
   }
+
+
 
   td {
     &.user,
@@ -160,7 +180,7 @@ table {
     border-bottom: 1px solid #ddd;
     padding: 0.8rem;
     vertical-align: text-top;
-
+    
     @media only screen and (max-width: 33.5em) {
       text-align: center;
     }
@@ -242,22 +262,42 @@ table {
     }
   }
 
-  &--logout {
+  &--logout,
+  &--mode {
     display: flex;
     text-align: center;
     width: 100%;
-    gap: .5rem;
+    column-gap: .8rem;
     text-transform: none;
     letter-spacing: .05rem;
     padding: .8rem 1rem;
+    line-height: 1.5; //centers the icon and text
 
-    & img {
+    &.dark {
+      color: var(--color-dm-font);
+
+      & img {
+        filter: invert(60%);
+      }
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    img {
+      width: 2.5rem;
+      height: 2.5rem;
       filter: invert(30%);
     }
 
     &:hover,
     &:focus {
       background-color: #F2F2F2;
+
+      &.dark {
+        background-color: var(--color-dm-bg-2);
+      }
     }
   }
 }
@@ -325,7 +365,6 @@ table {
     color: var(--color-white);
   }
 }
-
 
 .btn-query {
   border: 1px solid var(--color-blue);

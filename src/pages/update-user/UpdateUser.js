@@ -11,9 +11,7 @@ export default function UpdateUser() {
 
   return (
     <div className='update-user'>
-
       <FormUser id={id} user={document} />
-
     </div>
   )
 }

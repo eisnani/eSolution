@@ -1,6 +1,5 @@
-import './FormWork.scss';
-import { categories, services, goods, hr, sd } from '../components/SelectOptions';
 import { useEffect, useRef, useState } from 'react';
+import { categories, services, goods, hr, sd } from '../components/SelectOptions';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDocument } from '../hooks/useDocument';
 import { useAuthContext } from '../hooks/useAuthContext';
@@ -8,6 +7,8 @@ import { useFirestore } from '../hooks/useFirestore';
 import { timestamp } from '../firebase/config';
 import Loader from '../components/Loader';
 import { assignApprover } from './AssignApprover';
+import { useThemeContext } from '../hooks/useThemeContext';
+import './FormWork.scss';
 
 export default function FormWork({ document, id }) {
   const [title, setTitle] = useState('');
@@ -22,6 +23,7 @@ export default function FormWork({ document, id }) {
   const { addDocument, updateDocument, response } = useFirestore('works');
   const [classOthers, setClassOthers] = useState('');
   const { approvers } = assignApprover(type, 'juliet@test.com');
+  const { themeMode } = useThemeContext();
 
 
   const titleRef = useRef(null);
@@ -133,12 +135,12 @@ export default function FormWork({ document, id }) {
     <> 
       { !_user && <Loader /> }
       { _user && 
-        <div className='form-work'>
-          <div className="form-container">
+        <div className="form-work">
+          <div className={`form-container ${themeMode}`}>
             
             <h3 className="form-heading">Request form</h3>
 
-            <form className="request-form" onSubmit={handleSubmit}>
+            <form className='request-form' onSubmit={handleSubmit}>
               <div className="wrapper-requester">
                 <span>Requester</span>
                 <p className='requester'>{`${_user.firstName} ${_user.lastName}`}</p> 
@@ -250,7 +252,8 @@ export default function FormWork({ document, id }) {
 
               <label className='due-date'>
                 <span>Due date *</span>
-                <input 
+                <input
+                  className='date-picker'
                   type="date" 
                   name='dueDate'
                   required

@@ -17,7 +17,7 @@ export default function QueryDetails() {
   const { id } = useParams();
   const { document } = useDocument('works', id);
   const { user } = useAuthContext();
-  const { modalMode } = useThemeContext();
+  const { modalMode, themeMode } = useThemeContext();
   const navigate = useNavigate();
   const formWrapperRef = useRef();
 
@@ -44,15 +44,15 @@ export default function QueryDetails() {
   return (
     <>
       { document && 
-        <div className={`query-details ${modalMode}`}>
+        <div className={`query-details ${modalMode} ${themeMode}`}>
           <div className='wrapper-img'>
             <img 
               src={closeIcon} alt="icon" 
               onClick={() => navigate('/inquiries')}
             />
           </div>
-          <div className="work-container">
-            <div className="query-container">
+          <div className={`work-container ${themeMode}`}>
+            <div className={`query-container ${themeMode}`}>
               <div className="que-btn-cont">
                 <h2 className="query-h2">Query</h2>
                 <button className={`btn-query ${showForm ? repBtnActive : ''}`} onClick={handleReply}>Reply</button>

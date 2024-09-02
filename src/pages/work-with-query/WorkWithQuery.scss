@@ -4,6 +4,14 @@
   min-height: calc(100vh - 13.1rem); 
   width: 100%;
 
+  &.dark {
+    background: var(--color-dm-bg-1);
+
+    .cont-wwq {
+      background-color: var(--color-dm-bg-2);
+    }
+  }
+
   @media only screen and (max-width: 33.5em) {
     padding: 1rem;
   }
@@ -37,6 +45,10 @@
   overflow-y: auto;
   transition: all .5s ease-in-out;
   overflow-x: hidden;
+
+  &.dark {
+    background: var(--color-dm-bg-1);
+  }
   
   &.expanded {
     width: 100%;
@@ -71,6 +83,10 @@
     box-shadow: 0 .5rem .8rem rgba(0,0,0,.3);
     background-color: white;
 
+    &.dark {
+      background-color: var(--color-dm-bg-2);
+    }
+
     @media only screen and (max-width: 33.5em) {
       padding: 1.5rem;
     }
@@ -83,6 +99,10 @@
     box-shadow: 0 .5rem .8rem rgba(0,0,0,.3);
     background-color: white;
     margin-bottom: 3rem;
+
+    &.dark {
+      background-color: var(--color-dm-bg-3);
+    }
   }
 
   .que-btn-cont {

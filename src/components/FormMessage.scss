@@ -8,6 +8,10 @@
   min-width: 60rem;
   border-radius: 1rem;
 
+  &.dark {
+    background-color: var(--color-dm-bg-2);
+  }
+
   @media only screen and (max-width: 33.5em) {
     min-width: fit-content;
     margin-left: -3rem;
@@ -72,6 +76,12 @@
         }
       }
     }
+  }
+  
+  &.dark label select,
+  &.dark label textarea {
+    background: var(--color-dm-bg-3);
+    color: var(--color-dm-font);
   }
 
   .wrapper-btn {

@@ -5,10 +5,12 @@ import WorkStatus from './WorkStatus';
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Loader from '../../components/Loader';
 import closeIcon from '../../assets/close_small.svg'
+import { useThemeContext } from '../../hooks/useThemeContext';
 
 export default function WorkList() {
   const { documents, error, isPending } = useCollection('works');
   const { user } = useAuthContext();
+  const { themeMode } = useThemeContext();
 
   const queryString = useLocation().search;
   const queryParams = new URLSearchParams(queryString);
@@ -42,7 +44,7 @@ export default function WorkList() {
   }
 
   return (
-    <div className='work-list'>
+    <div className={`work-list ${themeMode}`}>
       { isPending && <Loader /> }
         <div className='cont-keyword'>
           { query && 
@@ -53,9 +55,9 @@ export default function WorkList() {
           }
         </div> 
       { !error && !isPending && myRequests.length > 0 &&
-        <div className="cont-wl">
+        <div className='cont-wl'>
           <h3 className='wl-heading'>My requests</h3>
-            <table>
+            <table className={themeMode}>
               <thead>
                 <tr>
                   <th>Request</th>

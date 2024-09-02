@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import './Searchbar.scss';
 import searchIcon from '../assets/search.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useThemeContext } from '../hooks/useThemeContext';
 
 export default function Searchbar() {
   const [term, setTerm] = useState('');
+  const { themeMode } = useThemeContext();
   const navigate = useNavigate();
   const inputRef = useRef();
   const pathname = useLocation().pathname;
@@ -25,7 +27,7 @@ export default function Searchbar() {
   }
 
   return (
-    <div className='searchbar'>
+    <div className={`searchbar ${themeMode}`}>
       <form onSubmit={handleOnSubmit} className='search-form'>
         <img 
           src={searchIcon} 

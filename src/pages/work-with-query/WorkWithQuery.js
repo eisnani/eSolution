@@ -5,11 +5,13 @@ import { useNavigate, Routes, Route, Navigate, useLocation } from 'react-router-
 import QueryDetails from './QueryDetails';
 import closeIcon from '../../assets/close_small.svg';
 import Loader from '../../components/Loader';
+import { useThemeContext } from '../../hooks/useThemeContext'; 
 
 export default function WorkWithQuery() {
   const { documents, error, isPending } = useCollection('works');
   const { documents: users } = useCollection('users');
   const { user } = useAuthContext();
+  const { themeMode } = useThemeContext();
   const navigate = useNavigate();
 
   const queryString = useLocation().search;
@@ -38,7 +40,7 @@ export default function WorkWithQuery() {
   }
 
   return (
-    <div className='work-with-query'>
+    <div className={`work-with-query ${themeMode}`}>
       { isPending && <Loader /> }
       <div className='cont-keyword'>
         { _query && 
@@ -51,7 +53,7 @@ export default function WorkWithQuery() {
       { !error && !isPending && query.length > 0 &&
         <div className='cont-wwq'>
           <h3 className='wwq-heading'>Inquiries</h3>
-            <table>
+            <table className={themeMode}>
               <thead>
                 <tr>
                   <th>Request</th>

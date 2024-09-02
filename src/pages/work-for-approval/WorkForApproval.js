@@ -1,15 +1,17 @@
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useCollection } from '../../hooks/useCollection';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
-import WorkDetails from './WorkDetails';
 import ActionButton from '../../components/ActionButton';
-import './WorkForApproval.scss';
+import WorkDetails from './WorkDetails';
 import closeIcon from '../../assets/close_small.svg';
 import Loader from '../../components/Loader';
+import { useThemeContext } from '../../hooks/useThemeContext';
+import './WorkForApproval.scss';
 
 export default function WorkForApproval() {
   const { documents, error, isPending } = useCollection('works');
   const { user } = useAuthContext();
+  const { themeMode } = useThemeContext();
   const navigate = useNavigate();
 
   const queryString = useLocation().search;
@@ -38,7 +40,7 @@ export default function WorkForApproval() {
   }
 
   return (
-    <div className='work-for-approval'>
+    <div className={`work-for-approval ${themeMode}`}>
       { isPending && <Loader /> }
       <div className='cont-keyword'>
         { query && 
@@ -49,9 +51,9 @@ export default function WorkForApproval() {
         }
       </div> 
       { !error && !isPending && forApproval.length > 0 &&
-        <div className="cont-wfa">
+        <div className='cont-wfa'>
           <h3 className='wfa-heading'>For approvals</h3>
-          <table>
+          <table className={themeMode}>
               <thead>
                 <tr>
                   <th>Request</th>

@@ -10,12 +10,12 @@ export default function WorkStatus({ user }) {
   const { id } = useParams();
   const { document } = useDocument('works', id);
   const navigate = useNavigate();
-  const { modalMode } = useThemeContext();
+  const { modalMode, themeMode } = useThemeContext();
   
   return (
     <>
       { document && 
-        <div className={`work-status ${modalMode}`}>
+        <div className={`work-status ${modalMode} ${themeMode}`}>
           <div className='wrapper-icon'>
             <img 
               className='closeIcon' 

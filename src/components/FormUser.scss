@@ -9,6 +9,24 @@
   border-radius: 1rem;
   position: relative;
 
+  &.dark {
+    background: var(--color-dm-bg-2);
+    color: var(--color-dm-font);
+
+    .user-form {
+      label input, 
+      label textarea, 
+      label select {
+        background: var(--color-dm-bg-3);
+        color: var(--color-dm-font);
+      }
+
+      button, a {
+        color: var(--color-dm-font);
+      }
+    }
+  }
+
   @media only screen and (max-width: 33.5em) {
     min-width: fit-content;
     padding: 1.5rem 2.5rem 2.5rem;

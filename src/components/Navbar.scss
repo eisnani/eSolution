@@ -8,6 +8,41 @@
   height: 7.1rem;
   border-bottom: 1px solid transparent;
 
+
+  //DARK MODE//
+  &.dark {
+    background: var(--color-dm-bg-1);
+
+    .notification {
+      .notification-bell {
+        img {
+          filter: invert(60%);
+        }
+        
+        span {
+          background-color: var(--color-dm-bg-3);
+        }
+      }
+
+      .notification-menu {
+        background-color: var(--color-dm-bg-3);
+  
+        p:hover {
+          background-color: var(--color-dm-bg-2);
+        }
+      }
+    } 
+
+    .profile {
+      .user img {
+        filter: invert(60%);
+      }
+      .profile-menu {
+        background-color: var(--color-dm-bg-3);
+      }
+    }
+  }
+
   display: flex;
   align-items: center;
   padding: 1.5rem 4.5rem 1.5rem 3.5rem;
@@ -225,12 +260,6 @@
       &.open {
         display: block;
         opacity: 1;
-      }
-
-      img.icon-logout {
-        width: 2.5rem;
-        height: 2.5rem;
-        filter: invert(30%);
       }
     }
   }
