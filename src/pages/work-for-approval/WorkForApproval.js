@@ -41,7 +41,7 @@ export default function WorkForApproval() {
         data={forApproval} 
         resetPath={'/approvals'}
         itemCount={itemCount}
-        heading={'For approval'}
+        heading={'For approvals'}
         fallbackMsg={'You currently have no item for approval.'}
         >
         <table className={themeMode}>

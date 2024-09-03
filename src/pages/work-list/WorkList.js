@@ -45,7 +45,7 @@ export default function WorkList() {
       data={myRequests} 
       resetPath={'/requests'}
       itemCount={itemCount}
-      heading={'My request'}
+      heading={'My requests'}
       fallbackMsg={'You currently have no request.'}
     >
       <table className={themeMode}>
