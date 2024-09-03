@@ -1,4 +1,4 @@
-.form-work {
+.section-form-request {
   padding: 3rem 0 3rem;
 
   .form-container {
@@ -17,7 +17,7 @@
       background: var(--color-dm-bg-2);
       color: var(--color-dm-font);
 
-      .request-form {
+      .form-request {
 
         .wrapper-requester,
         .wrapper-department {
@@ -78,13 +78,14 @@
       border-radius: 1rem;
     }
 
-    .request-form {
+    .form-request {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       column-gap: 2rem;
       row-gap: 2rem;
 
-      .wrapper-requester, .wrapper-department {
+      .wrapper-requester, 
+      .wrapper-department {
 
         span {
           font-size: 1.6rem;
@@ -156,6 +157,10 @@
             }
           }
         }
+      }
+
+      .due-date ::-webkit-calendar-picker-indicator {
+        filter: invert(30%);
       }
 
       // GRID

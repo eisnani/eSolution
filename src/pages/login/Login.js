@@ -15,7 +15,7 @@ export default function Login() {
   }
 
   return (
-    <div className='login'>
+    <section className='login'>
       <img src={logo} alt="logo" />
       <form onSubmit={handleSubmit}>
         <h2 className='h2-heading mb-4r txt-ctr'>Welcome</h2>
@@ -45,6 +45,6 @@ export default function Login() {
       </form>
 
       <p>Edris' portfolio &copy; 2024</p>
-    </div>
+    </section>
   )
 }

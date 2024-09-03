@@ -1,37 +1,3 @@
-// WORK WITH QUERY STARTS //
-.work-with-query {
-  padding: 1rem 5rem 5rem 5rem;
-  min-height: calc(100vh - 13.1rem); 
-  width: 100%;
-
-  &.dark {
-    background: var(--color-dm-bg-1);
-
-    .cont-wwq {
-      background-color: var(--color-dm-bg-2);
-    }
-  }
-
-  @media only screen and (max-width: 33.5em) {
-    padding: 1rem;
-  }
-
-  .cont-wwq {
-    border-radius: 1rem;
-    padding: 3rem;
-    box-shadow: 0 .5rem .8rem rgba(0,0,0,.3);
-    background-color: white;
-
-    .wwq-heading {
-      font-size: 2rem;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
-  }
-  //cont-keyword styling is at WorkForApproval.scss
-}
-// WORK WITH QUERY ENDS //
-
 // QUERY DETAILS STARTS //
 .query-details {
   position: fixed;
@@ -48,6 +14,14 @@
 
   &.dark {
     background: var(--color-dm-bg-1);
+
+    .work-container {
+      background-color: var(--color-dm-bg-2);
+
+      .query-container {
+        background-color: var(--color-dm-bg-3);
+      }
+    }
   }
   
   &.expanded {
@@ -83,10 +57,6 @@
     box-shadow: 0 .5rem .8rem rgba(0,0,0,.3);
     background-color: white;
 
-    &.dark {
-      background-color: var(--color-dm-bg-2);
-    }
-
     @media only screen and (max-width: 33.5em) {
       padding: 1.5rem;
     }
@@ -99,10 +69,6 @@
     box-shadow: 0 .5rem .8rem rgba(0,0,0,.3);
     background-color: white;
     margin-bottom: 3rem;
-
-    &.dark {
-      background-color: var(--color-dm-bg-3);
-    }
   }
 
   .que-btn-cont {

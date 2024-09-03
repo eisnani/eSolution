@@ -1,19 +1,18 @@
+import { useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+
 import { useDocument } from '../../hooks/useDocument';
 import { useAuthContext } from "../../hooks/useAuthContext";
-import closeIcon from '../../assets/close.svg';
 import { useThemeContext } from "../../hooks/useThemeContext";
 import Approval from "../../components/Approval";
 import Work from '../../components/Work';
-import { useRef, useState } from "react";
 import FormMessage from "../../components/FormMessage";
 import ApprovalCycle from "../../components/ApprovalCycle";
+import closeIcon from '../../assets/close.svg';
 
 export default function QueryDetails() {
   const [showForm, setShowForm] = useState(false);
   const [replyTo, setReplyTo] = useState('');
-  const [repBtnActive, setRepBtnActive] = useState(false);
-  const [fwBtnActive, setFwBtnActive] = useState(false);
   const { id } = useParams();
   const { document } = useDocument('works', id);
   const { user } = useAuthContext();
@@ -27,8 +26,6 @@ export default function QueryDetails() {
     setShowForm(true);
     setTimeout(() => formWrapperRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' }) , 0);
     setReplyTo(document.approval.queryFrom);
-    setFwBtnActive('');
-    setRepBtnActive('clicked');
   }
 
   const handleForward = (e) => {
@@ -37,26 +34,24 @@ export default function QueryDetails() {
     setShowForm(true);
     setTimeout(() => formWrapperRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' }) , 0);
     setReplyTo('');
-    setRepBtnActive('');
-    setFwBtnActive('clicked');
   }
 
   return (
     <>
       { document && 
-        <div className={`query-details ${modalMode} ${themeMode}`}>
+        <section className={`query-details ${modalMode} ${themeMode}`}>
           <div className='wrapper-img'>
             <img 
               src={closeIcon} alt="icon" 
               onClick={() => navigate('/inquiries')}
             />
           </div>
-          <div className={`work-container ${themeMode}`}>
-            <div className={`query-container ${themeMode}`}>
+          <div className="work-container">
+            <div className="query-container">
               <div className="que-btn-cont">
                 <h2 className="query-h2">Query</h2>
-                <button className={`btn-query ${showForm ? repBtnActive : ''}`} onClick={handleReply}>Reply</button>
-                <button className={`btn-approve ${showForm ? fwBtnActive : ''}`} onClick={handleForward}>Forward</button>
+                <button className={`btn-query ${replyTo && showForm ? 'clicked' : ''}`} onClick={handleReply}>Reply</button>
+                <button className={`btn-approve ${!replyTo && showForm ? 'clicked' : ''}`} onClick={handleForward}>Forward</button>
               </div>
 
               { showForm &&    
@@ -73,7 +68,7 @@ export default function QueryDetails() {
             <h4 className='h4-heading mb-2r'>Approval Cycle</h4>
             <ApprovalCycle document={document} />
           </div>
-        </div>
+        </section>
       }
     </>
   )

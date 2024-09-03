@@ -15,7 +15,7 @@ export default function WorkStatus({ user }) {
   return (
     <>
       { document && 
-        <div className={`work-status ${modalMode} ${themeMode}`}>
+        <section className={`work-status ${modalMode} ${themeMode}`}>
           <div className='wrapper-icon'>
             <img 
               className='closeIcon' 
@@ -32,7 +32,7 @@ export default function WorkStatus({ user }) {
             <h4 className='h4-heading mb-2r'>Approval History</h4>
             <Approval document={document} user={user} />
           </div>
-        </div>
+        </section>
       }
     </>
   )

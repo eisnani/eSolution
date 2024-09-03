@@ -1,46 +1,14 @@
 // WORK LIST STARTS //
-.work-list {
-  padding: 1rem 5rem 5rem 5rem;
-  min-height: calc(100vh - 13.1rem);
-  width: 100%;
+.approved {
+  background-color: var(--color-green);
+  color: #ffff;
+  padding: .1rem .5rem;
+}
 
-  &.dark {
-    background: var(--color-dm-bg-1);
-
-    .cont-wl {
-      background: var(--color-dm-bg-2);
-    }
-  }
-
-  @media only screen and (max-width: 33.5em) {
-    padding: 1rem;
-  }
-
-  .cont-wl {
-    border-radius: 1rem;
-    padding: 3rem;
-    box-shadow: 0 .5rem .8rem rgba(0,0,0,.3);
-    background-color: white;
-
-
-    .wl-heading {
-      font-size: 2rem;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-    }
-
-    .approved {
-      background-color: var(--color-green);
-      color: #ffff;
-      padding: .1rem .5rem;
-    }
-
-    .declined {
-      background-color: var(--color-red);
-      color: #ffff;
-      padding: .1rem .5rem;
-    }
-  }
+.declined {
+  background-color: var(--color-red);
+  color: #ffff;
+  padding: .1rem .5rem;
 }
 // WORK LIST STARTS //
 

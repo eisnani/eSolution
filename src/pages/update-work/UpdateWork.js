@@ -9,7 +9,6 @@ export default function UpdateWork() {
   const { document } = useDocument('works', id);
   const { themeMode } = useThemeContext();
 
-
   return (
     <div className={`update-work ${themeMode}`}>
       <FormWork document={document} id={id} />

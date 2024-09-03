@@ -30,10 +30,9 @@ export default function WorkDetails() {
   return (
     <>
       { document && 
-
         ( document.approval.approver === user.email && 
 
-          <div className={`work-details ${modalMode} ${themeMode}`}>
+          <section className={`work-details ${modalMode} ${themeMode}`}>
             <div className='wrapper-img'>
               <img 
                 src={closeIcon} alt="icon" 
@@ -66,7 +65,7 @@ export default function WorkDetails() {
               <h4 className='h4-heading mb-2r'>Approval History</h4>
               <Approval document={document} user={user} />
             </div>
-          </div>
+          </section>
         )
       }
     </>

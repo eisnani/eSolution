@@ -135,12 +135,12 @@ export default function FormWork({ document, id }) {
     <> 
       { !_user && <Loader /> }
       { _user && 
-        <div className="form-work">
+        <section className="section-form-request">
           <div className={`form-container ${themeMode}`}>
             
             <h3 className="form-heading">Request form</h3>
 
-            <form className='request-form' onSubmit={handleSubmit}>
+            <form className='form-request' onSubmit={handleSubmit}>
               <div className="wrapper-requester">
                 <span>Requester</span>
                 <p className='requester'>{`${_user.firstName} ${_user.lastName}`}</p> 
@@ -289,7 +289,7 @@ export default function FormWork({ document, id }) {
               { response.error && <p className="form-error">{response.error}</p> }
             </form>
           </div>
-        </div>
+        </section>
       }
     </>
   )
