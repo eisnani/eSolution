@@ -1,33 +1,26 @@
-import { useNavigate, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useNavigate, Routes, Route, Navigate } from 'react-router-dom';
 
 import './WorkWithQuery.scss';
 import { useCollection } from '../../hooks/useCollection';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import QueryDetails from './QueryDetails';
 import { useThemeContext } from '../../hooks/useThemeContext'; 
+import { useQueryFn } from '../../hooks/useQueryFn';
 import SectionContainer from '../../components/SectionContainer';
+import QueryDetails from './QueryDetails';
 
 export default function WorkWithQuery() {
   const { documents, error, isPending } = useCollection('works');
   const { documents: users } = useCollection('users');
   const { user } = useAuthContext();
   const { themeMode } = useThemeContext();
+  const { query } = useQueryFn();
   const navigate = useNavigate();
 
-  const queryString = useLocation().search;
-  const queryParams = new URLSearchParams(queryString);
-  const query = queryParams.get('q');
+  const dataQuery = documents.filter(doc => doc.approval.queryTo === user.email);
   
-  const data = 
-    query ?
-    documents
-    .filter(doc => doc.title.toLowerCase().includes(query.toLowerCase()))
-    .filter(doc => doc.approval.queryTo === user.email) :
-
-    documents
-      .filter(doc => doc.approval.queryTo === user.email);
-
-  const itemCount = documents.filter(doc => doc.approval.queryTo === user.email).length;
+  const data = query ?
+    dataQuery.filter(doc => doc.title.toLowerCase().includes(query.toLowerCase())) :
+    dataQuery;
 
   const handleClick = (e, id) => {
     e.stopPropagation();
@@ -40,7 +33,7 @@ export default function WorkWithQuery() {
       error={error} query={query} 
       data={data} 
       resetPath={'/inquiries'}
-      itemCount={itemCount}
+      itemCount={dataQuery.length}
       heading={'Inquiries'}
       fallbackMsg={'You currently have no inquiry.'}
     >

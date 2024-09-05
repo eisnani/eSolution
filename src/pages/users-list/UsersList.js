@@ -1,38 +1,41 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useCollection } from '../../hooks/useCollection';
 import { useAuthContext } from '../../hooks/useAuthContext'; 
+import { useFirestore } from '../../hooks/useFirestore';
 import { useThemeContext } from '../../hooks/useThemeContext';
-import Backdrop from '../../components/Backdrop';
+import { useQueryFn } from '../../hooks/useQueryFn';
 import Modal from '../../components/Modal';
 import SectionContainer from '../../components/SectionContainer';
 import './UsersList.scss';
 
 export default function UsersList() {
-  const [showModal, setShowModal] = useState(false);
   const { documents, isPending, error } = useCollection('users');
-  const [userId, setUserId] = useState('');
+  const { deleteDocument } = useFirestore('users');
+  const [Id, setId] = useState('');
   const { isAdmin } = useAuthContext();
   const { themeMode } = useThemeContext();
+  const { query } = useQueryFn();
 
-  const queryString = useLocation().search;
-  const queryParams = new URLSearchParams(queryString);
-  const query = queryParams.get('q');
+  const modalRef = useRef();
 
-  const users = 
-    query ? 
+  const users = query ? 
     documents
       .filter(user => 
         user.firstName.toLowerCase().includes(query.toLowerCase()) ||  
         user.lastName.toLowerCase().includes(query.toLowerCase())) :
-        
     documents;
 
-  const handleDelete = (e, id) => {
+  function handleInitiateDelete(e, id) {
     e.stopPropagation();
-    setShowModal(true);
-    setUserId(id);
+    modalRef.current.showModal();
+    setId(id)
+  }
+
+  async function handleConfirmDelete(id) {
+    await deleteDocument(id);
+    modalRef.current.close();
   }
 
   return (
@@ -71,7 +74,7 @@ export default function UsersList() {
                   <td>
                     <span className='user-list-btn-wrap'>
                       <Link className='btn-link' to={`/update-user/${user.id}`}>Update</Link>
-                      <button className='btn-delete' onClick={(e) => handleDelete(e, user.id)}>Delete</button>
+                      <button className='btn-delete' onClick={(e) => handleInitiateDelete(e, user.id)}>Delete</button>
                     </span>
                   </td>
                 }
@@ -81,17 +84,14 @@ export default function UsersList() {
         </tbody>
         <tfoot></tfoot>
       </table>
-
-      { showModal &&  
-        <>
-          <Backdrop />
-          <Modal 
-            message={'Please confirm user deletion.'} 
-            userId={userId}
-            setShowModal={setShowModal}
-          />
-        </>
-      }
+      <Modal 
+        modalRef={modalRef}
+        onConfirm={handleConfirmDelete}
+        id={Id}
+        text={'Are you sure you want to proceed with deletion?'}
+        confirmBtnCaption={'Yes'}
+        dismissBtnCaption={'No'}
+      />
     </SectionContainer>
   )
 }

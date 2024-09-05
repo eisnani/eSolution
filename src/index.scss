@@ -404,3 +404,71 @@ table {
 }
 // BUTTON SMALL SIZE ENDS //
 // BUTTON ENDS //
+
+// DIALOG STARTS //
+dialog {
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  box-shadow: 0 .5rem .8rem rgba(0,0,0,.3);
+
+  .msg-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .btn-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  &.action {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 4rem 7rem;
+    color: red;
+    font-size: 1.8rem;
+    background-color: var(--color-gray-light);
+    
+    &::backdrop {
+     background-color: rgba(0,0,0,.4);
+    }
+
+    img {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+
+    .msg-container {
+      gap: 1.5rem;
+    }
+  }
+
+  &.info {
+    top: 10rem;
+    right: 2rem;
+    margin-left: auto;
+    background-color: var(--color-green);
+    border-left: .6rem solid #004a00;
+    color: #ffff;
+    padding: 2rem 4rem 2rem 3rem;
+  
+    &::backdrop {
+      background-color: transparent;
+    }
+
+    img {
+      width: 2.5rem;
+      height: 2.5rem;
+      filter: invert(90%);
+    }
+
+    .msg-container {
+      gap: 1rem;
+    }
+  }
+}
+// DIALOG ENDS //

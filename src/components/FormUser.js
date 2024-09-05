@@ -4,17 +4,15 @@ import './FormUser.scss';
 import { designations, departments } from './SelectOptions';
 import { useFirestore } from '../hooks/useFirestore';
 import { useCreateUser } from '../hooks/useCreateUser';
-import Alert from './Alert';
 import { useThemeContext } from '../hooks/useThemeContext';
 
-export default function FormUser({ id, user }) {
+export default function FormUser({ id, user, isShowModal }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [designation, setDesignation] = useState('');
   const [department, setDepartment] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showAlert, setShowAlert] = useState(false);
   const { updateDocument, response } = useFirestore('users');
   const { createUser, isPending, error, res } = useCreateUser();
   const { themeMode } = useThemeContext();
@@ -52,22 +50,18 @@ export default function FormUser({ id, user }) {
     e.preventDefault();
     if (id && user) {
       await updateDocument(id, { firstName, lastName, designation, department })
-      if (!response.error) {
-        setShowAlert(true);
-        resetForm();
-        setTimeout(() => navigate('/users'), 1000); 
+      if (!response.error) { 
+        setTimeout(() => navigate('/users'), 1500);
+        isShowModal();
       }
-    }
-    else 
-      await createUser(email, password, firstName, lastName, designation, department);
-  };
 
-  useEffect(() => {
-    if (res) {
-      setShowAlert(true);
-      resetForm();
+    } else {
+      await createUser(email, password, firstName, lastName, designation, department);
+      if (!res && error) return;
     }
-  }, [res])
+
+    resetForm();
+  };
 
   return (
     <div className={`container-user-form ${themeMode}`}>
@@ -144,6 +138,7 @@ export default function FormUser({ id, user }) {
               <span>Password</span>
               <input 
                 required 
+                minLength={6}
                 name='password'
                 type="password" 
                 onChange={e => setPassword(e.target.value)}
@@ -155,9 +150,7 @@ export default function FormUser({ id, user }) {
 
         <div className="wrapper-btn">
           { isPending &&  
-            <>
-              <button className="btn btn--secondary" disabled>Submitting...</button>
-            </>
+            <button className="btn btn--secondary" disabled>Submitting...</button>
           }
           { !(isPending || response.isPending) &&
             <>
@@ -169,7 +162,6 @@ export default function FormUser({ id, user }) {
         </div>
         { response.error && <p className="form-error">{response.error}</p> }
         { error && <p className="form-error">{error}</p> }
-        { showAlert && <Alert message={id ? 'User is updated' : 'User added.'} setShowAlert={!id ? setShowAlert : null} /> }
       </form>
     </div>
   );

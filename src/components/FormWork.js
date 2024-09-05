@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { categories, services, goods, hr, sd } from '../components/SelectOptions';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { categories, services, goods, hr, sd } from '../components/SelectOptions';
 import { useDocument } from '../hooks/useDocument';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useFirestore } from '../hooks/useFirestore';
@@ -10,7 +11,7 @@ import { assignApprover } from './AssignApprover';
 import { useThemeContext } from '../hooks/useThemeContext';
 import './FormWork.scss';
 
-export default function FormWork({ document, id }) {
+export default function FormWork({ document, id, isShowModal }) {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [type, setType] = useState('');
@@ -25,9 +26,8 @@ export default function FormWork({ document, id }) {
   const { approvers } = assignApprover(type, 'juliet@test.com');
   const { themeMode } = useThemeContext();
 
-
-  const titleRef = useRef(null);
   const navigate = useNavigate();
+  const titleRef = useRef();
 
   useEffect(() => {
     if (category === '') setType('');
@@ -101,6 +101,8 @@ export default function FormWork({ document, id }) {
         }
       }
       await updateDocument(id, request);
+      if (!response.error) setTimeout(() => navigate('/requests'), 1500);
+
     } 
     else {
       const request = {
@@ -128,7 +130,10 @@ export default function FormWork({ document, id }) {
       await addDocument(request);
     }
 
-    if (response) navigate('/requests');
+    if (!response.error) isShowModal();
+      else return;
+      
+    resetForm();
   }
 
   return (
@@ -161,6 +166,7 @@ export default function FormWork({ document, id }) {
                   onChange={e => setTitle(e.target.value)}
                   value={title}
                   ref={titleRef}
+                  autoFocus
                 />
               </label>
 

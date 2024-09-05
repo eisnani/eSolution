@@ -8,12 +8,12 @@ export default function Searchbar() {
   const [term, setTerm] = useState('');
   const { themeMode } = useThemeContext();
   const navigate = useNavigate();
-  const inputRef = useRef();
+  const formRef = useRef();
   const pathname = useLocation().pathname;
   const queryString = useLocation().search;
 
   useEffect(() => {
-    if (!queryString) inputRef.current.value = '';
+    if (!queryString) formRef.current.reset();
   }, [queryString]);
 
   const handleKeyUp = (e) => {
@@ -23,12 +23,12 @@ export default function Searchbar() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    inputRef.current.value = '';
+    formRef.current.reset();
   }
 
   return (
     <div className={`searchbar ${themeMode}`}>
-      <form onSubmit={handleOnSubmit} className='search-form'>
+      <form onSubmit={handleOnSubmit} className='search-form' ref={formRef}>
         <img 
           src={searchIcon} 
           alt="icon" 
@@ -39,7 +39,6 @@ export default function Searchbar() {
           name='search'
           placeholder={pathname === '/users' ? 'Search by name' : 'Search by title'}
           onChange={e => setTerm(e.target.value)}
-          ref={inputRef}
         />
       </form>
     </div>

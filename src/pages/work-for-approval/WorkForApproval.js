@@ -1,10 +1,11 @@
-import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
 import { useCollection } from '../../hooks/useCollection';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import ActionButton from '../../components/ActionButton';
 import { useThemeContext } from '../../hooks/useThemeContext';
+import { useQueryFn } from '../../hooks/useQueryFn';
 import SectionContainer from '../../components/SectionContainer';
+import ActionButton from '../../components/ActionButton';
 import WorkDetails from './WorkDetails';
 import './WorkForApproval.scss';
 
@@ -12,22 +13,13 @@ export default function WorkForApproval() {
   const { documents, error, isPending } = useCollection('works');
   const { user } = useAuthContext();
   const { themeMode } = useThemeContext();
+  const { query } = useQueryFn();
   const navigate = useNavigate();
 
-  const queryString = useLocation().search;
-  const queryParams = new URLSearchParams(queryString);
-  const query = queryParams.get('q');
-
-  const forApproval = 
-    query ?
-    documents
-      .filter(doc => doc.title.toLowerCase().includes(query.toLowerCase()))
-      .filter(doc => doc.approval.approver === user.email) :
-
-    documents
-      .filter(doc => doc.approval.approver === user.email);
-
-  const itemCount = documents.filter(doc => doc.approval.approver === user.email).length;
+  const forApprovals = documents.filter(doc => doc.approval.approver === user.email);
+  const data = query ?
+    forApprovals.filter(doc => doc.title.toLowerCase().includes(query.toLowerCase())) :
+    forApprovals;
 
   const handleClick = (e, id) => {
     e.stopPropagation();
@@ -38,9 +30,9 @@ export default function WorkForApproval() {
       <SectionContainer 
         isPending={isPending} 
         error={error} query={query} 
-        data={forApproval} 
+        data={data} 
         resetPath={'/approvals'}
-        itemCount={itemCount}
+        itemCount={forApprovals.length}
         heading={'For approvals'}
         fallbackMsg={'You currently have no item for approval.'}
         >
@@ -54,7 +46,7 @@ export default function WorkForApproval() {
             </tr>
           </thead>
           <tbody>
-            {forApproval
+            {data
               .sort((a, b) => a.createdAt - b.createdAt)
               .map((doc) => (
                 <tr key={doc.id}>
