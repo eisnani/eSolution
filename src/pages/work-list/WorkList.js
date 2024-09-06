@@ -97,7 +97,7 @@ export default function WorkList() {
                   <button className='btn-details' onClick={(e) => handleClick(e, doc.id)}>Status</button>
                 </td>
                 <td>
-                  <button className='btn-details' onClick={(e) => handleEdit(e, doc.id)}>Edit</button>
+                  <button className='btn-details mb-1r' onClick={(e) => handleEdit(e, doc.id)}>Edit</button>
                   <button className='btn-delete' onClick={(e) => handleInitiateDelete(e, doc.id)} >Delete</button>
                 </td>
               </tr>
