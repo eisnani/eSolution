@@ -20,7 +20,8 @@
     height: 4rem;
   }
 
-  form {
+
+  .form-container {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -31,11 +32,17 @@
     width: 36rem;
     backdrop-filter: blur(.8rem);
     background-color: var(--color-white);
+
+    .login-heading {
+      letter-spacing: .3rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
     
     
     label {
       display: block;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
 
       span {
         font-size: 1.6rem;
@@ -65,8 +72,18 @@
       }
     }
 
-    button {
+    .btn--login, .btn--logging-in, .btn--demo {
       text-transform: none;
+      width: 100%;
+    }
+
+    .btn--demo span {
+      display: block;
+      padding: .2rem;
+    }
+
+    .btn--login {
+      margin-top: 1rem;
     }
 
     .form-error {
@@ -84,7 +101,15 @@
     }
   }
 
-  p {
+  .or {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 2rem 0 2rem;
+    text-align: center;
+  }
+
+  .copyright {
     position: absolute;
     bottom: 0;
     right: 0;

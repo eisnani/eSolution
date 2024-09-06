@@ -14,37 +14,54 @@ export default function Login() {
     login(email, password);
   }
 
+  function handleClick(e) {
+    e.stopPropagation();
+    login('juliet@test.com', '123456');
+  }
+
   return (
     <section className='login'>
       <img src={logo} alt="logo" />
-      <form onSubmit={handleSubmit}>
-        <h2 className='h2-heading mb-4r txt-ctr'>Welcome</h2>
+      <div className="form-container">
+        <form onSubmit={handleSubmit}>
+          <h2 className='login-heading'>Welcome</h2>
 
-        <label>
-          <span>Email</span>
-          <input 
-            type="email" 
-            required
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-        </label>
+          <label>
+            <span>Email</span>
+            <input 
+              type="email" 
+              required
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </label>
 
-        <label>
-          <span>Password</span>
-          <input 
-            type="password"
-            required 
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
-        </label>
-        { !isPending && <button className='btn btn--primary mt-1r'>Login</button> }
-        { isPending && <button className='btn btn--secondary mt-1r' disabled>Logging in...</button> }
-        { error && <p className="form-error">{error}</p> }
-      </form>
-
-      <p>Edris' portfolio &copy; 2024</p>
+          <label>
+            <span>Password</span>
+            <input 
+              type="password"
+              required 
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
+          </label>
+          { !isPending && 
+            <>
+              <button className='btn btn--primary btn--login'>Login (CRUD)</button> 
+              <p className='or'>- Or -</p>
+            </>
+          }
+          { isPending && <button className='btn btn--secondary btn--logging-in' disabled>Logging in...</button> }
+          { error && <p className="form-error">{error}</p> }
+        </form>
+        { !isPending && 
+          <button onClick={handleClick} className='btn btn--tertiary btn--demo'>
+            <span>Continue as guest</span>
+            <span>(Read only)</span>
+          </button>
+        }
+      </div>
+      <p className='copyright'>Edris' portfolio &copy; 2024</p>
     </section>
   )
 }
